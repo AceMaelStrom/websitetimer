@@ -14,6 +14,7 @@
             }
             p,figure,a {
                 text-align: center;
+                color: antiquewhite;
             }
             @keyframes colorChange {
                 0% {color: rgb(255, 0, 0);}
@@ -21,8 +22,10 @@
                 100% {color: rgb(0, 8, 255);}
             }
             body {
+                text-align: center;
                 background: rgba(100, 100, 255, 0.2);
-                opacity: 0.1;
+                position: relative;
+                z-index: 1;
             }
             div {
                 font-size: 40px;
@@ -41,6 +44,7 @@
         </style>
     </head>
     <body>
+
         
         <h1>How to code HTML</h1>
         <h3>For Dummies</h3>
@@ -54,7 +58,7 @@
         <figure>
             <figcaption>Song that I like:</figcaption>
             <figcaption>Speder2 - Active Volanco</figcaption>
-            <audio controls loop>
+            <audio id = "thesonge" controls loop>
                 <source src="active-volcano.mp3" type="audio/mpeg">
             </audio>
             <br>
@@ -63,15 +67,27 @@
                 <figcaption>Grinding my gears!</figcaption> 
             </div>
             <p>So, hello there. This is a test HTML site for me, AceMaestro, to learn about HTML.</p>
+            <figcaption>This button leads to Hackatime.</figcaption>
             <a href="https://hackatime.hackclub.com" target="_blank">
-                <button type="button" 
-                style="background-color: aquamarine;
+                <button onclick ="checker()" 
+                type="button" 
+                style="background-color: rgb(138, 175, 117);
                 border-radius:5px;
                 padding: 5px 10px;
                 font-size: 20px;
                 "
                 >Press</button>
             </a>
+            <script>
+                function checker() {
+                    let r = 3;
+                    
+                    if(true) {
+                        document.getElementById("thesonge").play()
+                    }
+                }
+            </script>
+
         </figure>
     </body>
 
