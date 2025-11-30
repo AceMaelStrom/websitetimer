@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
+    <audio id="calamity" src="CalamityBell.wav.mp3"></audio>
     <head>
+        <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
         <title>20/20/20 Rule </title>
         <style>
@@ -21,7 +23,7 @@
                 50% {color: rgb(4, 255, 0);}
                 100% {color: rgb(0, 8, 255);}
             }
-            body {
+            body,textarea {
                 text-align: center;
                 background: rgba(100, 100, 255, 0.2);
                 position: relative;
@@ -38,6 +40,13 @@
             }
             div:hover {
                 transform: scale(1.25)
+            }
+
+            textarea {
+                background-color: aliceblue;
+                color: black;
+                border-radius: 100px;
+                outline: 5px;
             }
 
 
@@ -69,25 +78,51 @@
             <p>So, hello there. This is a test HTML site for me, AceMaestro, to learn about HTML.</p>
             <figcaption>This button leads to Hackatime.</figcaption>
             <a href="https://hackatime.hackclub.com" target="_blank">
-                <button onclick ="checker()" 
+                <button onclick ="checkercounter()" 
                 type="button" 
                 style="background-color: rgb(138, 175, 117);
                 border-radius:5px;
                 padding: 5px 10px;
                 font-size: 20px;
                 "
-                >Press</button>
+                >Hackatime</button>
             </a>
             <script>
-                function checker() {
-                    let r = 3;
+                let counter = 0;
+
+                function checkercounter() {  
+                    let sound = document.getElementById("calamity");
+                    counter++
+                    sound.play();
+                    if (counter ==10);
+
+
                     
-                    if(true) {
-                        document.getElementById("thesonge").play()
-                    }
+
+
                 }
             </script>
+            <p>
+                So there's this picture of a dog
+                <br>
+                <img src="https://imgs.search.brave.com/5bmsWey7JI_6dgHhhRlNnWXS2xy5bMsyNspiJc4k73o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA1Lzk3Lzg4LzUy/LzM2MF9GXzU5Nzg4/NTIyNF8xRURIMlZB/TE9jUXNNa2lUTEpR/WTM4SnFpanhZVjVj/ZC5qcGc" alt="lol">
+                <br>
+                and I think its kinda cool.
+            </p>
+            
+            </p>
+                    <label for="areatexto">
+                        <textarea id="areatexto" placeholder="Type out something real funny." rows="5" cols="70"></textarea>
+                    </label>
+                    <br>
+                    <button onclick="begone()">Entero</button>
+                    <script>
+                        function begone() {
+                            document.getElementById("areatexto").value="";
 
+                        }
+                    </script>
+            </p>
         </figure>
     </body>
 
