@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <audio id="calamity" src="CalamityBell.wav.mp3"></audio>
     <style> 
         canvas {
             border-radius: 4px;
@@ -60,6 +61,13 @@
 
         }
 
+        .theanswer {
+            text-align: center;
+            color: azure;
+            
+        }
+
+
         @keyframes bgchanger {
             0% {color: rgb(129, 119, 96);}
             50% {color: rgb(60, 63, 60);}
@@ -98,9 +106,11 @@
                  let x = 200;
                  let y = 200;
                  let angle = 0;
-                 let rad = 100;
+                 let a = 50;
+                 let b = 100;
                  let startingx = x;
                  let strartingy = y;
+                 let time = 0;
                  
                  img.onload = function() {
                     requestAnimationFrame(Animation)
@@ -110,10 +120,11 @@
                  function Animation() {
                     ctx.clearRect(0,0,canvas.width, canvas.height);
                     ctx.drawImage(img,x,y,100,100)
-                    x = startingx + (Math.cos(angle)*rad);
-                    y = strartingy + (Math.sin(angle)*rad);
+                    x = startingx + a*Math.cos(8*time)
+                    y = strartingy + b*Math.cos(3*time)
 
                     angle += 0.05;
+                    time += 0.01;
                     requestAnimationFrame(Animation);
 
                  };
@@ -132,20 +143,25 @@
             <span>!</span>
         </h1>
         <br>
+        
         <div class="textspace">
             <textarea class="homestuckbubble" readonly rows="2" cols="50">Hello. You are trapped in my mansion where you have to read Homestuck. AHHAHAHAHHAHAH</textarea>
             <br>
             <br>
-            <a onclick="homestuck()">
+            <a onclick="homestuck()" href="https://homestuck.com/">
                 <img src="intermisssion.webp" height="500" width="700">
             </a>
             <script>
                 function homestuck() {
-                    let link = 
+                    let sound = document.getElementById("calamity")
+                    sound.play();
                 }
             </script>
 
+
         </div>
+        <!--THE KeY HOlDS THE WaY. ONE OF tWO, TWO OF THREe, THREE OF SEVEN. LORd TO LONGEVITY.html -->
+        <p class="theanswer">key hole?</p>
             
     </body>
 
