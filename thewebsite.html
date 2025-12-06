@@ -8,6 +8,29 @@
         <meta charset="UTF-8">
         <title>20/20/20 Rule </title>
         <style>
+            .thetop {
+                z-index: 999;
+                position: fixed;
+                top: 0;
+                left: 0;
+                text-align: center;
+                width: 100%;
+                background-color:rgba(90, 57, 230, 0.3);
+                font-size: 14px;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            .thebottomui {
+                z-index: 999;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                width: 100%;
+                background-color: rgba(138, 175, 117, 0.5);
+                font-size: 15px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+            }
             h1,h3 {
                 text-align: center;
                 font-size: 50px;
@@ -17,7 +40,7 @@
             }
             p,figure,a {
                 text-align: center;
-                color: antiquewhite;
+                color: rgb(103, 82, 56);
             }
             @keyframes colorChange {
                 0% {color: rgb(255, 0, 0);}
@@ -54,7 +77,40 @@
         </style>
     </head>
     <body>
+        <div class="thebottomui">
+            <p>
+                <button>
+                    <a href="./nextpage.html">Continue.</a>
+                </button>
+            </p>
+        </div>
 
+        <div class="thetop">
+            <p id="clockwatch">5:00</p>
+            <button onclick="startTimer()">Start Time.</button>
+        </div>
+        <script>
+    let time = 300;
+    let timerInterval = null;
+
+    function startTimer() {
+        if (timerInterval) return;
+
+        timerInterval = setInterval(function() {
+            if (time <= 0) {
+                clearInterval(timerInterval);
+                document.getElementById("clockwatch").textContent = "0:00";
+                return;
+            }
+
+            time--;
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            document.getElementById("clockwatch").textContent =
+                `${minutes}:${seconds.toString().padStart(2,'0')}`;
+        }, 1000);
+    }
+    </script>
         
         <h1>How to code HTML</h1>
         <h3>For Dummies</h3>
@@ -66,6 +122,7 @@
             <p>Hello, my name is AceMaestro and I am here to learn! And do some other stuff.</p>
         
         <figure>
+
             <figcaption>Song that I like:</figcaption>
             <figcaption>Speder2 - Active Volanco</figcaption>
             <audio id = "thesonge" controls loop>
@@ -138,9 +195,8 @@
                     }
                 </script>
                 <br>
-                <textarea rows="5" cols="50" placeholder="yippee"></textarea>
+                <textarea readonly rows="7" cols="100" placeholder="yippee">My mum (82F) told me (12M) to do the dishes (16) but I (12M) was too busy playing Fortnite (3 kills) so I (12M) grabbed my controller (DualShock 4) and threw it at her (138kph). She  died, and I (12M) went to prison (18 years). While in prison I (12M) incited several riots (3) and assumed leadership of a gang responsible for smuggling drugs (cocaine) into the country. I (12M) also ordered the assassination of several celebrities (Michael Jackson, Elvis Presley and Jeffrey Epstein) and planned a terrorist attack (9/11). Reddit, AITA?</textarea>
             </p>
-
         </figure>
     </body>
 
