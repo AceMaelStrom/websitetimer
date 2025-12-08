@@ -1,16 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
+    <title></title>
     <style>
+        canvas {
+            text-align: center;
+            display: block;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin: 0 auto;
+    
+        }
+        body {
+            animation: bg 3s infinite alternate;
+            background: repeating-radial-gradient(
+                circle at 100%,
+                rgba(60,60,60,0.7) 5px,
+                rgba(48, 48, 48, 0.4) 20px,
+                rgba(27, 26, 26, 0.193) 60px
+
+
+            );
+        }
+
+        @keyframes bg {
+            0% {background-color: rgb(56, 56, 56);}
+            25% {background-color: rgb(48, 48, 48);}
+            50% {background-color: rgb(31, 31, 31);}
+            75% {background-color: rgb(26, 26, 26);}
+            100% {background-color: black;}
+        }
 
     </style>
     <head>
 
     </head>
     <body>
-        <audio autoplay loop id="fnaf">
+        <audio autoplay muted loop id="fnaf">
             <source src="thedeathofdreams.mp3" type="audio/mpeg">
         </audio>
+        <script>
+            window.addEventListener("click", () => {
+                let audio = document.getElementById("fnaf");
+                audio.muted = false
+                audio.play();
+            });
+        </script>
+        <!--Arc ciRcle texT-->
+        <canvas  class="circum" id="circle" width="600" height="600"></canvas>
+        <script>
+            const canva = document.getElementById("circle");
+            const ctx = canva.getContext("2d");
+
+            const text = "IS THIS WHERE YOU WANT TO BE? A HOLLOW PLACE TO BE.";
+            ctx.font = "24px sans-serif";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            const cx = canva.width / 2;
+            const cy = canva.height / 2;
+            const radius = 180;
+            const chars = text.split("");
+            const totalArc = 2 * Math.PI;
+            const step = totalArc / Math.max(chars.length - 1, 1);
+            const startAngle = -totalArc / 2;
+
+            let rotation = 0;
+
+            function animate() {
+                ctx.clearRect(0, 0, canva.width, canva.height);
+
+                // draw each character
+                for (let i = 0; i < chars.length; i++) {
+                    const ch = chars[i];
+                    const angle = startAngle + i * step + rotation;
+                    const x = cx + radius * Math.cos(angle);
+                    const y = cy + radius * Math.sin(angle);
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(angle + Math.PI / 2); // tangent to circle
+                    ctx.fillText(ch, 0, 0);
+                    ctx.restore();
+                }
+
+                rotation -= 0.001; // rotate the whole text slowly
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+        </script>
+        
+
     </body>
     
 </html>

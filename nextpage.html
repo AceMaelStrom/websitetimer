@@ -129,10 +129,10 @@
                  function Animation() {
                     ctx.clearRect(0,0,canvas.width, canvas.height);
                     ctx.drawImage(img,x,y,100,100)
-                    x = startingx + a*Math.cos(8*time)
-                    y = strartingy + b*Math.cos(3*time)
+                    x = startingx + a*Math.cos(8*time*angle)
+                    y = strartingy + b*Math.cos(3*time*angle)
 
-                    angle += 0.05;
+                    angle += 0.001;
                     time += 0.01;
                     requestAnimationFrame(Animation);
 
