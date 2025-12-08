@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>VVVVVVV</title>
+    <script>
+        setInterval(() => {
+            document.body.style.height = (document.body.scrollHeight + 500) +"px";
+        },50);
+    </script>
     <style>
+        .hello {
+            color: antiquewhite;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+            text-shadow: 
+                -2px -2px 0px black,
+                2px -2px 0px black,
+                0px -2px 2px black,
+                0px -2px -2px black;
+
+            color: azure;
+            
+        }
         canvas {
             text-align: center;
             display: block;
@@ -11,7 +29,7 @@
             margin-left: auto;
             margin-right: auto;
             margin: 0 auto;
-    
+            animation: weee 5s infinite alternate;
         }
         body {
             animation: bg 3s infinite alternate;
@@ -23,6 +41,13 @@
 
 
             );
+        }
+
+        @keyframes weee {
+            0% {transform: translateY(0px);}
+            0% {transform: rotate(90deg);}
+            100% {transform: translateY(100px);}
+            100% {transform: rotate(270deg);}
         }
 
         @keyframes bg {
@@ -54,8 +79,8 @@
             const canva = document.getElementById("circle");
             const ctx = canva.getContext("2d");
 
-            const text = "IS THIS WHERE YOU WANT TO BE? A HOLLOW PLACE TO BE.";
-            ctx.font = "24px sans-serif";
+            const text = "IS THIS WHERE YOU WANT TO BE? WHAT ELATION. ";
+            ctx.font = "35px Georgia";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
@@ -94,7 +119,32 @@
             animate();
 
         </script>
-        
+        <h1 class="hello">doors doors doors and doors Doors galore We move on so you can rest But reciprocate you do not so we must reap our dues of our clicks</h1>
+        <!--theres a password down there, just go down there, down there, down,-->
+
+        <button id="guy" onclick="counter()" style="
+            background-color: rgb(87, 94, 91);
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+            width: 60px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        ">0</button>
+        <script>
+        let num = 0;
+        function counter() {
+            num++;
+            document.getElementById("guy").innerText = num;
+
+            if (num >=10) {
+                document.getElementById("guy").innerText = "end?"
+                
+
+            };
+        };
+        </script>
+
+
 
     </body>
     
