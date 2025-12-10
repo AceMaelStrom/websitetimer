@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        button {
+            border-radius: 5px;
+            background-color: blanchedalmond;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #hidden {
+            text-align: center;
+        }
+        .hih {
+            text-align: center;
+        }
+        .hih span {
+            animation: backie 2s infinite alternate;
+            color: black;
+            display: inline-block;
+        }
+        
+        .hih span:nth-child(1) {
+            animation-delay: 0s;}
+        .hih span:nth-child(2) {
+            animation-delay: 0.1s;}
+        .hih span:nth-child(3) {
+            animation-delay: 0.2s;}
+
+
+
+        @keyframes backie {
+            0% {transform: scaleX(1.4) rotate(20deg);}
+            50% {transform: scaleX(0.7) rotate(-20deg);}
+            100% {transform: scaleX(1) rotate(0deg);}
+
+        }
+    </style>
+    <body>
+        <h1 class="hih">
+            <span>h</span>
+            <span>i</span>
+            <span>.</span>
+        </h1>
+        <pre id="hidden"></pre>
+
+        <button onclick="typings()">...</button>
+        
+        <script>
+            let texto = "You did it. You found the end. Congratulations.";
+            let idtext = 0;
+            let on = false;
+
+            function typings () {
+                if (on) return;
+                    on = true;
+                    let textlocation = document.getElementById("hidden");
+                    textlocation.innerText = "";
+
+                    let interval = setInterval(() => {
+                        textlocation.innerText += texto[idtext];
+                        idtext++;
+
+                        if (idtext >= texto.length) {
+                            clearInterval(interval);
+                        };
+
+                },150);
+            };
+        </script>
+        
+    </body>
+</html>

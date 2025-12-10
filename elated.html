@@ -8,6 +8,12 @@
         },50);
     </script>
     <style>
+
+        #downpoint {
+            text-align: center;
+            transform: rotate(90deg) translateX(60px);
+            color: aliceblue;
+        }
         .hello {
             color: antiquewhite;
             font-family: Georgia, 'Times New Roman', Times, serif;
@@ -18,7 +24,6 @@
                 0px -2px 2px black,
                 0px -2px -2px black;
 
-            color: azure;
             
         }
         canvas {
@@ -35,8 +40,8 @@
             animation: bg 3s infinite alternate;
             background: repeating-radial-gradient(
                 circle at 100%,
-                rgba(60,60,60,0.7) 5px,
-                rgba(48, 48, 48, 0.4) 20px,
+                rgba(127, 127, 127, 0.7) 5px,
+                rgba(63, 63, 63, 0.4) 20px,
                 rgba(27, 26, 26, 0.193) 60px
 
 
@@ -66,6 +71,7 @@
         <audio autoplay muted loop id="fnaf">
             <source src="thedeathofdreams.mp3" type="audio/mpeg">
         </audio>
+        <audio id="calamitas" src="bell.mp3"></audio>
         <script>
             window.addEventListener("click", () => {
                 let audio = document.getElementById("fnaf");
@@ -121,7 +127,7 @@
         </script>
         <h1 class="hello">doors doors doors and doors Doors galore We move on so you can rest But reciprocate you do not so we must reap our dues of our clicks</h1>
         <!--theres a password down there, just go down there, down there, down,-->
-
+        <h1 id="downpoint">>>>>>></h1>
         <button id="guy" onclick="counter()" style="
             background-color: rgb(87, 94, 91);
             height: 50px;
@@ -138,10 +144,22 @@
 
             if (num >=10) {
                 document.getElementById("guy").innerText = "end?"
-                
+                if (num >=12) {
+                    let sound = document.getElementById("calamitas")
+                    sound.play();
+                    window.open("end.html")
 
+                };
             };
         };
+        </script>
+        <script>
+            let button = document.getElementById("guy")
+            let interval = 50
+            setInterval(() => {
+                interval += 20;
+                button.style.marginTop = (interval+ "px");
+            },100);
         </script>
 
 
