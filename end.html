@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
     <style>
+        .group {
+            display: flex;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        body {
+            background-color: rgb(226, 204, 169);
+        }
+        * {
+           cursor: url("limb.png")0 0, default !important;  
+        }
         button {
             border-radius: 5px;
             background-color: blanchedalmond;
             display: block;
             margin: 0 auto;
+        }
+
+        #winner {
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+
+            border-style: dashed;
+
+
         }
 
         #hidden {
@@ -44,7 +65,7 @@
         </h1>
         <pre id="hidden"></pre>
 
-        <button onclick="typings()">...</button>
+        <button id="hideafter" onclick="typings()">...</button>
         
         <script>
             let texto = "You did it. You found the end. Congratulations.";
@@ -55,6 +76,7 @@
                 if (on) return;
                     on = true;
                     let textlocation = document.getElementById("hidden");
+                    let hidden = document.getElementById("hideafter")
                     textlocation.innerText = "";
 
                     let interval = setInterval(() => {
@@ -63,11 +85,67 @@
 
                         if (idtext >= texto.length) {
                             clearInterval(interval);
+                            hidden.style.display = "none";
                         };
-
                 },150);
             };
         </script>
+        <div id="winner">
+            <canvas height="200" width="1000" id = "winning"></canvas>
+            <script>
+                var drawingbox = false;
+                let canvas = document.getElementById("winning");
+                let ctx = canvas.getContext("2d");
+                ctx.lineWidth = 3;
+                ctx.lineCap = "round";
+                ctx.strokeStyle = "black";
+                const cx = canvas.width/2;
+                const cy = canvas.height/2;
+                function positional(event) {
+                    const area = canvas.getBoundingClientRect();
+                    return {
+                        x: event.clientX - area.left,
+                        y: event.clientY - area.top
+                    };
+
+                };
+
+                canvas.addEventListener("mousedown", (event) => {
+                    drawingbox = true;
+                    const pos = positional(event);
+                    ctx.beginPath();
+                    ctx.moveTo(pos.x,pos.y);
+                });
+
+                canvas.addEventListener("mousemove", (event) => {
+                    if (!drawingbox) return;
+                    const pos = positional(event);
+                    ctx.lineTo(pos.x,pos.y);
+                    ctx.stroke();
+                });
+
+                canvas.addEventListener("mouseup", () => drawingbox = false);
+                canvas.addEventListener("mouseleave", () => drawingbox = false);
+
+            </script>
+            <button class="group" onclick="Clear()">Clear Signature</button>
+            <script>
+                function Clear() {
+                    ctx.clearRect(0,0,canvas.width,canvas.height)
+                };
+            </script>
+            <button class="group" onclick="Entero()">Enter.</button>
+            <script>
+                function Entero() {
+                    canvas.addEventListener("mousedown", () => drawingbox = false);
+                    canvas.addEventListener("mouseup", () => drawingbox = false);
+                    canvas.addEventListener("mousemove", () => drawingbox = false);
+
+                };
+
+            </script>
+        </div>
+
         
     </body>
 </html>
