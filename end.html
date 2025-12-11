@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <style>
+        #paragraph {
+            text-align: center;
+            color: rgb(91, 112, 130);
+
+        }
         .group {
             display: flex;
             justify-content: center;
@@ -91,7 +96,7 @@
             };
         </script>
         <div id="winner">
-            <canvas height="200" width="1000" id = "winning"></canvas>
+            <canvas height="250" width="3000" id = "winning"></canvas>
             <script>
                 var drawingbox = false;
                 let canvas = document.getElementById("winning");
@@ -128,24 +133,33 @@
                 canvas.addEventListener("mouseleave", () => drawingbox = false);
 
             </script>
-            <button class="group" onclick="Clear()">Clear Signature</button>
-            <script>
-                function Clear() {
-                    ctx.clearRect(0,0,canvas.width,canvas.height)
-                };
-            </script>
-            <button class="group" onclick="Entero()">Enter.</button>
-            <script>
-                function Entero() {
-                    canvas.addEventListener("mousedown", () => drawingbox = false);
-                    canvas.addEventListener("mouseup", () => drawingbox = false);
-                    canvas.addEventListener("mousemove", () => drawingbox = false);
-
-                };
-
-            </script>
+         
         </div>
+        <button id="buttno" class="group" onclick="Clear()">Clear Signature</button>
+        <script>
+            function Clear() {
+                ctx.clearRect(0,0,canvas.width,canvas.height)
+            };
+        </script>
+        <button id="butno" class="group" onclick="Entero()">Enter.</button>
+        <p id="paragraph" style="display: none;">I, AceMaestro, congratulate you for getting here. Thanks for checking out my project! It took some real motivation to code this, but I believe that I somewhat know this language. I'm Zangerson on the slack BTW. Post this on the slack trust.</p>
+        <script>
+            function Entero() {
+                canvas.addEventListener("mousedown", () => drawingbox = false);
+                canvas.addEventListener("mouseup", () => drawingbox = false);
+                canvas.addEventListener("mousemove", () => drawingbox = false);
+                let button = document.getElementById("buttno");
+                let button2 = document.getElementById("butno");
+                let thankyouletter = document.getElementById("paragraph");
+                button.style.display = "none";
+                button2.style.display = "none";
+                thankyouletter.style.display = "block";
 
+
+            };
+        </script>
         
+
+
     </body>
 </html>
