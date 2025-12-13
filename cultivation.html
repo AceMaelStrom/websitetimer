@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <title>French Cultivation Simulator</title>
+
     <style>
+        body {
+            background-color: rgb(113, 101, 101);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
         * {
             cursor: url("limb.png")0 0, default !important; 
         }
         #name {
             text-align: center;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         
         #start {
@@ -17,6 +21,16 @@
             background-image: linear-gradient(to left, #0000FF,#FFFFFF,#FF0000);
             border-radius: 5px;
             margin-top: 40px;
+        }
+
+        #ideapad {
+            white-space: pre-wrap;
+            text-align: center;
+            background-image: linear-gradient(to left, #0000ff69,#ffffffa3,#ff000071);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            margin-top: 50px;
         }
         .language-id {
             position: relative;
@@ -59,28 +73,46 @@
             <button onclick="french()" id="frlang" class="language">Frenchify</button>
         </div>
     </head>
-    <script>
-        let button2 = document.getElementById("enlang")
-        let button = document.getElementById("frlang");
-        function french() {
-            document.documentElement.lang = "fr";
-            document.getElementById("name").innerText = "Érudition Française";
-        };
-        function english() {
-            document.documentElement.lang = "en";
-            document.getElementById("name").innerText = "French Cultivation";   
-        };
-    </script>
 
     <body>
         <button onclick="startgame()" id="start">Find a Baguette on the floor.</button>
-        <p style="display: none;">"I found a baguette. I guess my quest begins!</p>
+        <p id="ideapad"></p>
         <script>
+            let text = "I found a baguette. I guess my quest begins!";
+            let frtext = "J'ai trouvé une baguette. Je suppose que ma quête commence!"
+            let on = false;
+
             function startgame() {
                 let startbutton = document.getElementById("start");
-                startbutton.style.display = "none";
-                
-                
+                let textpin = document.getElementById("ideapad");
+                textpin.innerText = "";
+                if (on) return;
+                    if 
+
+
+
+                    startbutton.style.display = "none";
+                    on = true;
+                    textpin.innerText = text;
+            };
+        </script>
+        <script>
+            let button2 = document.getElementById("enlang")
+            let button = document.getElementById("frlang");
+            //for if language button is hit before start button
+            function french() {
+                document.documentElement.lang = "fr";
+                document.getElementById("name").innerText = "Érudition Française";
+                if (on) {
+                    document.getElementById("ideapad").innerText = "J'ai trouvé une baguette. Je suppose que ma quête commence!";
+                };  
+            };
+            function english() {
+                document.documentElement.lang = "en";
+                document.getElementById("name").innerText = "French Cultivation";
+                if (on) {
+                    document.getElementById("ideapad").innerText = "I found a baguette. I guess my quest begins!";
+                };  
             };
         </script>
 
