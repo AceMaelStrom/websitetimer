@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>French Cultivation Simulator</title>
+    <style>
+        * {
+            cursor: url("limb.png")0 0, default !important; 
+        }
+        #name {
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        #start {
+            display: block;
+            margin: 0 auto;
+            font-size: medium;
+            background-image: linear-gradient(to left, #0000FF,#FFFFFF,#FF0000);
+            border-radius: 5px;
+            margin-top: 40px;
+        }
+        .language-id {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language {
+            position: relative;
+            padding: 10px 16px;
+            font-size: medium;
+            background-image: linear-gradient(to left, #0000FF,#FFFFFF,#FF0000);
+            border-radius: 5px;
+            animation: uppie 2s infinite alternate;
+        }
+
+        .language::before {
+            position: absolute;
+            content: "";
+            border: 2px solid transparent;
+            z-index: -1;
+            border-radius: inherit;
+            inset: -2px;
+            background-image: linear-gradient(to bottom, #0000FF, #FFFFFF, #FF0000);
+        }
+
+
+        @keyframes uppie {
+            0% {transform: translateY(0px);}
+            100% {transform: translateY(20px);}
+        }
+    </style>
+    <head>
+        <p id="name">French Cultivation</p>
+        <div class="language-id">
+            <button onclick="english()" id="enlang" class="language">Anglo-Saxify</button>
+            <br>
+            <button onclick="french()" id="frlang" class="language">Frenchify</button>
+        </div>
+    </head>
+    <script>
+        let button2 = document.getElementById("enlang")
+        let button = document.getElementById("frlang");
+        function french() {
+            document.documentElement.lang = "fr";
+            document.getElementById("name").innerText = "Érudition Française";
+        };
+        function english() {
+            document.documentElement.lang = "en";
+            document.getElementById("name").innerText = "French Cultivation";   
+        };
+    </script>
+
+    <body>
+        <button onclick="startgame()" id="start">Find a Baguette on the floor.</button>
+        <p style="display: none;">"I found a baguette. I guess my quest begins!</p>
+        <script>
+            function startgame() {
+                let startbutton = document.getElementById("start");
+                startbutton.style.display = "none";
+                
+                
+            };
+        </script>
+
+        
+    </body>
+
+</html>
