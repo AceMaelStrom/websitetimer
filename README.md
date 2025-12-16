@@ -6,9 +6,10 @@ so basically this is a test website because i dont know how to code in HTML, CSS
 1. git clone https://github.com/AceMaelStrom/websitetimer
 2. cd websitetimer
 3. npm install liveserver
+4. to deploy/build: its all js, css, and html so just clone it using link above and should work; if not the webpage https://testsiter.netlify.app/ is the website online; 
+5. double click index.html from the repo to run with live server
 
 
-4. to deploy/build: its all js, css, and html so just clone it using link above and should work; if not the webpage https://testsiter.netlify.app/ is the website online;
 
 
 shoutout to santa aditya and aryan rao for making me realize the internet is a wide place where you can search up answers to problems; i would be stuck otherwise
