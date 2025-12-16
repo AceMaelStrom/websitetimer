@@ -15,7 +15,19 @@
             display: block;
         }
 
-        .imggif{
+        #french {
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            align-items: center;
+            height: 100px;
+            width: 200px;
+            background-color: aquamarine;
+            border-radius: 5px;
+
+        }
+
+        .imggif {
             transition: transform 0.5s;
         }
         .imggif:hover {
@@ -180,7 +192,25 @@
         </div>
         <!--THE KeY HOlDS THE WaY. ONE OF tWO, TWO OF THREe, THREE OF SEVEN. LORd TO LONGEVITY.html -->
         <p class="theanswer">homestuckey</p>
-        <p id=""></p>
+        <button onclick="countdowntofrench()" id="french">Don't click this.</button>
+        <script>
+            let timesclicked = 0;
+            var button = document.getElementById("french");
+            function countdowntofrench() {
+                
+                if (timesclicked === 1) {
+                    button.innerText = "I'm warning you. Don't.";
+                    timesclicked += 1;
+                } else if (timesclicked === 2) {
+                    button.innerText = "Click 1 more time. I dare you.";
+                    timesclicked += 1;
+                } else if (timesclicked === 3) {
+                    window.open("cultivation.html");
+                } else if (timesclicked === 0) {
+                    timesclicked += 1;
+                }
+            };
+        </script>
             
     </body>
 

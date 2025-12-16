@@ -1,5 +1,5 @@
 # websitetimer
-so basically this is a test website because i dont know how to code in HTML, CSS, or JS. There's a main website and then there's buttons to navigate to the next one through a continue button. I doubled the main page as a typical 2007 page, with the usual lack of coherence and a meme here or there. there is one website you have to type in the link though. i launched this on netlify so where you see the name like nextpage, index, etc., just replace it with a certain code in a certain code comment. also plan to update this along the way
+so basically this is a test website because i dont know how to code in HTML, CSS, or JS. There's a main website and then there's buttons to navigate to the next one through a continue button. I doubled the main page as a typical 2007 page, with the usual lack of coherence and a meme here or there. there is one website you have to type in the link though. i launched this on netlify so where you see the name like nextpage, index, etc., just replace it with a certain code in a certain code comment. also plan to update this along the way; btw this websitetimer thing lost the plot entirely
 
 git clone link : https://github.com/AceMaelStrom/websitetimer
 
