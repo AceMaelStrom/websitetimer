@@ -180,6 +180,7 @@
             var money = 0;
             var autoclickerpwr = 0;
             var clickpwr = 1;
+            var chancepwr = 20;
             var sound = document.getElementById("jinglebells")
             //language declaration
             var button1 = document.getElementById("firstupgrade");
@@ -240,6 +241,9 @@
                 if (money >= upgradecost3) {
                     money -= upgradecost3;
                     document.getElementById("currency").innerText = "Baguettes: " + money;
+                    chancepwr -= 2;
+                    var gambling =
+                    
                     
 
                 };
@@ -256,6 +260,7 @@
                 };
             };
             function chanceclicker() {
+                
 
             };
 
