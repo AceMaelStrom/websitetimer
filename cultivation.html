@@ -92,8 +92,22 @@
     </head>
 
     <body>
+        <audio id="anthem" src="french anthem.mp3"></audio>
         <audio id="jinglebells"  src="pizza.mp3"></audio>
         <audio id="bagueet"  src="baguette.mp3"></audio>
+        <script>
+            frenchaudio = document.getElementById("anthem");
+            const starttime = 41;
+            const endtime = 330;
+            frenchaudio.currentTime = starttime;
+            frenchaudio.play();
+
+            frenchaudio.addEventListener("timeupdate", () => {
+                if (frenchaudio.currentTime >= endtime) {
+                    frenchaudio.currentTime = starttime;
+                };
+            });
+        </script>
 
 
         <button onclick="startgame()" id="start">Find a Baguette on the floor.</button>
@@ -154,13 +168,15 @@
             <img id="clickIMG" src="La_Baguette.png" alt="gg">
             <p id="currency">Baguettes: 0</p>
             <button onclick="plusone()" style="display: none; height: 125px; width: 100px;" id="firstupgrade" class="upgrades"></button>
-            <button onclick="plustwo()" style="height: 125px; width: 100px; display: none;" id="secondupgrade" class="upgrades">Baguette Clicker: +1 every 500 milliseconds | Cost: 300 | Total: 0</button>
+            <button onclick="plustwo()" style="height: 125px; width: 100px; display: none;" id="secondupgrade" class="upgrades"></button>
+            <button onclick="plusthree()" style="height: 125px; width: 100px; display: none;" id="thirdupgrade" class="upgrades"></button>
             
         </div>
         <script>
             var timer = 400;
             var upgradecost1 = 10;
             var upgradecost2 = 300;
+            var upgradecost3 = 550;
             var money = 0;
             var autoclickerpwr = 0;
             var clickpwr = 1;
@@ -168,6 +184,7 @@
             //language declaration
             var button1 = document.getElementById("firstupgrade");
             var button2 = document.getElementById("secondupgrade");
+            var button3 = document.getElementById("thirdupgrade");
             document.getElementById("clickIMG").addEventListener("click", () => {
             money +=clickpwr;
             document.getElementById("currency").innerText = "Baguettes: " + money;
@@ -181,6 +198,10 @@
                 button2.style.display = "inline-block";
                 translateupgrade();
             };
+            if (autoclickerpwr >= 3) {
+                button3.style.display = "inline-block";
+            }
+
         });
             function translateupgrade() {
                 if (languagetime === "fr") {
@@ -212,19 +233,27 @@
                     upgradecost2 = Math.round(upgradecost2 * (1.09 + Math.random() * 1.1));
                     translateupgrade();
                     document.getElementById("bagueet").play();
+                };
+            };
+            function plusthree() {
+                if (money >= upgradecost3) {
+
+                };
+
+                
+            };
             //auto clicker    
             function autoclicker() {
                 if (autoclickerpwr >= 1) {
                     setInterval(() => {
                         money += 1;
                         document.getElementById("currency").innerText = "Baguettes: " + money;
-                        }, timer);
-                    };
+                    }, timer);
                 };
             };
 
 
-        };
+
 
 
 
