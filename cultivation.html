@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <title>French Cultivation Simulator</title>
-
     <style>
         body {
             background-color: rgb(113, 101, 101);
@@ -10,8 +9,26 @@
         * {
             cursor: url("limb.png")0 0, default !important; 
         }
+        #startingscore {
+            text-align: center;
+            display: none;
+            margin-top: 60px;
+            color: wheat;
+
+        }
         #name {
             text-align: center;
+    
+        }
+
+        .upgrades {
+            background-image: linear-gradient(to left, #0000FF,#FFFFFF,#FF0000);
+            border-radius: 5px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            vertical-align: top;
+
         }
         
         #start {
@@ -75,9 +92,14 @@
     </head>
 
     <body>
+        <audio id="jinglebells"  src="pizza.mp3"></audio>
+        <audio id="bagueet"  src="baguette.mp3"></audio>
+
+
         <button onclick="startgame()" id="start">Find a Baguette on the floor.</button>
         <p id="ideapad"></p>
         <script>
+            var languagetime = "en";
             let text = "I found a baguette. I guess my quest begins!";
             let frtext = "J'ai trouvé une baguette. Je suppose que ma quête commence!"
             let on = false;
@@ -87,33 +109,123 @@
                 let textpin = document.getElementById("ideapad");
                 textpin.innerText = "";
                 if (on) return;
-                    if 
-
-
-
                     startbutton.style.display = "none";
                     on = true;
-                    textpin.innerText = text;
+                    if (languagetime === "en") {
+                        textpin.innerText = text;
+                    } else if (languagetime === "fr") {
+                        textpin.innerText = frtext;
+                    } else {
+                        textpin.innerText = text;
+                    };
+                    let baguette = document.getElementById("startingscore");
+                    baguette.style.display = "block";
             };
-        </script>
-        <script>
+            // buttons
             let button2 = document.getElementById("enlang")
             let button = document.getElementById("frlang");
             //for if language button is hit before start button
             function french() {
                 document.documentElement.lang = "fr";
+                languagetime = "fr";
                 document.getElementById("name").innerText = "Érudition Française";
                 if (on) {
                     document.getElementById("ideapad").innerText = "J'ai trouvé une baguette. Je suppose que ma quête commence!";
+                    document.getElementById("firstupgrade").innerText = "Mise à niveau de la baguette: +1 | Coût: " + upgradecost1 + " | Total: " + (clickpwr -1);
+                    return languagetime;
                 };  
             };
             function english() {
                 document.documentElement.lang = "en";
+                languagetime = "en";
                 document.getElementById("name").innerText = "French Cultivation";
                 if (on) {
                     document.getElementById("ideapad").innerText = "I found a baguette. I guess my quest begins!";
+                    document.getElementById("firstupgrade").innerText = "Baguette Upgrade: +1 | Cost: " + upgradecost1 + " | Total: " + (clickpwr - 1);
+                    return languagetime;
                 };  
             };
+        </script>
+        <div id="startingscore">
+            <img id="clickIMG" src="La_Baguette.png" alt="gg">
+            <p id="currency">Baguettes: 0</p>
+            <button onclick="plusone()" style="display: none; height: 100px; width: 90px;" id="firstupgrade" class="upgrades"></button>
+            <button onclick="plustwo()" style="height: 100px; width: 90px; display: none;" id="secondupgrade" class="upgrades">Baguette Clicker: +1 every 500 milliseconds | Cost: 300 | Total: 0</button>
+            
+        </div>
+        <script>
+    
+            var timer = 500;
+            var upgradecost1 = 10;
+            var upgradecost2 = 300;
+            var money = 0;
+            var autoclickerpwr = 0;
+            var clickpwr = 1;
+            let sound = document.getElementById("jinglebells")
+            //language declaration
+            var button1 = document.getElementById("firstupgrade");
+            if (languagetime === "en") {
+                button1.innerText = "Baguette Upgrade: +1 | Cost: " + upgradecost1 + " | Total: " + (clickpwr - 1);
+            } else if (languagetime === "fr") {
+                button1.innerText = "Mise à niveau de la baguette: +1 | Coût: " + upgradecost1 + " | Total: " + (clickpwr -1);
+            };
+            document.getElementById("clickIMG").addEventListener("click", () => {
+                money +=clickpwr;
+                document.getElementById("currency").innerText = "Baguettes: " + money;
+                let dupikate = sound.cloneNode();
+                dupikate.play();
+                if (money >= upgradecost1) {
+                    var button1 = document.getElementById("firstupgrade");
+                    button1.style.display = "inline-block";
+                    
+                };
+                if (clickpwr-1 >= 5) {
+                    var button2 = document.getElementById("secondupgrade");
+                    button2.style.display = "inline-block";
+
+                };
+            });
+            function plusone() {
+                if (money >= upgradecost1) {
+                    money = money - upgradecost1;
+                    document.getElementById("currency").innerText = "Baguettes: " + money;
+                    clickpwr += 1;
+                    var button1 = document.getElementById("firstupgrade");
+                    upgradecost1 = Math.round(upgradecost1 * (1.05 + Math.random() * 1.1));
+                    if (languagetime === "en") {
+                        button1.innerText = "Baguette Upgrade: +1 | Cost: " + upgradecost1 + " | Total: " + (clickpwr - 1);
+                    } else if (languagetime === "fr") {
+                        button1.innerText = "Mise à niveau de la baguette: +1 | Coût: " + upgradecost1 + " | Total: " + (clickpwr -1);
+                    };
+                    document.getElementById("bagueet").play();
+                };
+            };
+            function plustwo() {
+                //declare upgrade
+                if (money >= upgradecost2) {
+                    money = money - upgradecost2;
+                    document.getElementById("currency").innerText = "Baguettes: " + money;
+                    autoclickerpwr += 1;
+                    timer = timer - (autoclickerpwr*20);
+                    var button2 = document.getElementById("secondupgrade");
+                    autoclicker(); // STARTS AUTOCLICKING
+                    upgradecost2 = Math.round(upgradecost2 * (1.15 + Math.random() * 1.12));
+                    button2.innerText = "Baguette Clicker: +1 every " + timer + " milliseconds | Cost: " + upgradecost2 + "| Total: " + autoclickerpwr;
+            function autoclicker() {
+                if (autoclickerpwr >= 1) {
+                    setInterval(() => {
+                        money += 1;
+                        document.getElementById("currency").innerText = "Baguettes: " + money;
+                        }, timer);
+                    };
+                };
+            };
+
+
+        };
+
+
+
         </script>
 
         
