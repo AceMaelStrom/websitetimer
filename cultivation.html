@@ -198,8 +198,9 @@
                 button2.style.display = "inline-block";
                 translateupgrade();
             };
-            if (autoclickerpwr >= 3) {
+            if (autoclickerpwr >= 3 && clickpwr >= 8) {
                 button3.style.display = "inline-block";
+                translateupgrade();
             }
 
         });
@@ -228,7 +229,7 @@
                     money = money - upgradecost2;
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     autoclickerpwr += 1;
-                    timer = timer - (autoclickerpwr*20);
+                    timer = timer - (autoclickerpwr*40);
                     autoclicker(); // STARTS AUTOCLICKING
                     upgradecost2 = Math.round(upgradecost2 * (1.09 + Math.random() * 1.1));
                     translateupgrade();
@@ -237,6 +238,9 @@
             };
             function plusthree() {
                 if (money >= upgradecost3) {
+                    money -= upgradecost3;
+                    document.getElementById("currency").innerText = "Baguettes: " + money;
+                    
 
                 };
 
@@ -250,6 +254,9 @@
                         document.getElementById("currency").innerText = "Baguettes: " + money;
                     }, timer);
                 };
+            };
+            function chanceclicker() {
+
             };
 
 
