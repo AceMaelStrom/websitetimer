@@ -92,6 +92,8 @@
     </head>
 
     <body>
+        <audio id="correct" src="answer-correct.mp3"></audio>
+        <audio id="incorrect" src="wrong-answer-buzzer.mp3"></audio>
         <audio id="anthem" src="french anthem.mp3"></audio>
         <audio id="jinglebells"  src="pizza.mp3"></audio>
         <audio id="bagueet"  src="baguette.mp3"></audio>
@@ -167,20 +169,19 @@
         <div id="startingscore">
             <img id="clickIMG" src="La_Baguette.png" alt="gg">
             <p id="currency">Baguettes: 0</p>
-            <button onclick="plusone()" style="display: none; height: 125px; width: 100px;" id="firstupgrade" class="upgrades"></button>
-            <button onclick="plustwo()" style="height: 125px; width: 100px; display: none;" id="secondupgrade" class="upgrades"></button>
-            <button onclick="plusthree()" style="height: 125px; width: 100px; display: none;" id="thirdupgrade" class="upgrades"></button>
+            <button onclick="plusone()" style="display: none; height: 130px; width: 100px;" id="firstupgrade" class="upgrades"></button>
+            <button onclick="plustwo()" style="height: 130px; width: 100px; display: none;" id="secondupgrade" class="upgrades"></button>
+            <button onclick="plusthree()" style="height: 130px; width: 100px; display: none;" id="thirdupgrade" class="upgrades"></button>
             
         </div>
         <script>
             var timer = 400;
             var upgradecost1 = 10;
             var upgradecost2 = 300;
-            var upgradecost3 = 550;
+            var upgradecost3 = 5;
             var money = 0;
             var autoclickerpwr = 0;
             var clickpwr = 1;
-            var chancepwr = 20;
             var sound = document.getElementById("jinglebells")
             //language declaration
             var button1 = document.getElementById("firstupgrade");
@@ -208,10 +209,12 @@
             function translateupgrade() {
                 if (languagetime === "fr") {
                     button1.innerText = "Mise à niveau de la baguette: +1 | Coût: " + upgradecost1 + " | Total: " + (clickpwr -1);
-                    button2.innerText = "Clicker Baguette: +1 toutes les " + " millisecondes | Coût: " + upgradecost2 + " | Total: " + autoclickerpwr;
+                    button2.innerText = "Clicker Baguette: +1 toutes les " + timer + " millisecondes | Coût: " + upgradecost2 + " | Total: " + autoclickerpwr;
+                    button3.innerText = "Pariez pour le jackpot avec une chance de 5% | Coût: " + upgradecost3;
                 } else if (languagetime === "en") {
                     button1.innerText = "Baguette Upgrade: +1 | Cost: " + upgradecost1 + " | Total: " + (clickpwr - 1);
                     button2.innerText = "Baguette Clicker: +1 every " + timer + " milliseconds | Cost: " + upgradecost2 + " | Total: " + autoclickerpwr;
+                    button3.innerText = "Gamble for jackpot with a 5% chance | Cost: " + upgradecost3;
                 };
             }
             function plusone() {
@@ -219,9 +222,10 @@
                     money = money - upgradecost1;
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     clickpwr += 1;
-                    upgradecost1 = Math.round(upgradecost1 * (1.05 + Math.random() * 1.06));
+                    upgradecost1 = Math.round(upgradecost1 * (1.03 + Math.random() * 1.02));
                     translateupgrade();
-                    document.getElementById("bagueet").play();
+                    let bagueet = document.getElementById("bagueet").cloneNode();
+                    bagueet.play();
                 };
             };
             function plustwo() {
@@ -230,22 +234,26 @@
                     money = money - upgradecost2;
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     autoclickerpwr += 1;
-                    timer = timer - (autoclickerpwr*40);
+                    timer = timer - (autoclickerpwr*20);
+                    if (timer < 0) {
+                        timer = 0;
+                        button2.disabled = true;
+
+                    };
                     autoclicker(); // STARTS AUTOCLICKING
-                    upgradecost2 = Math.round(upgradecost2 * (1.09 + Math.random() * 1.1));
+                    upgradecost2 = Math.round(upgradecost2 * (1.09 + Math.random() * 1.06));
                     translateupgrade();
-                    document.getElementById("bagueet").play();
+                    let bagueet = document.getElementById("bagueet").cloneNode();
+                    bagueet.play();
                 };
             };
             function plusthree() {
                 if (money >= upgradecost3) {
                     money -= upgradecost3;
                     document.getElementById("currency").innerText = "Baguettes: " + money;
-                    chancepwr -= 2;
-                    var gambling =
-                    
-                    
-
+                    upgradecost3 = Math.round(upgradecost3 * (0.8 + Math.random() * 1.1));
+                    chanceclicker();
+                    translateupgrade();
                 };
 
                 
@@ -259,19 +267,20 @@
                     }, timer);
                 };
             };
-            function chanceclicker() {
-                
-
+            function chanceclicker(min,max) {
+                let chancepwr = 0.05;
+                if (Math.random() <= 0.05) {
+                    let sound2 = document.getElementById("correct");
+                    let dupikate2 = sound2.cloneNode();
+                    dupikate2.play();
+                    money = money*5;
+                } else {
+                    let sound3 = document.getElementById("incorrect");
+                    let dupikate3 = sound3.cloneNode();
+                    dupikate3.play();
+                };
             };
-
-
-
-
-
-
-        </script>
-
-        
+        </script> 
     </body>
 
 </html>
