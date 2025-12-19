@@ -267,19 +267,19 @@
                     }, timer);
                 };
             };
-            function chanceclicker(min,max) {
-                let chancepwr = 0.05;
+            function chanceclicker() {
                 if (Math.random() <= 0.05) {
                     let sound2 = document.getElementById("correct");
                     let dupikate2 = sound2.cloneNode();
                     dupikate2.play();
-                    money = money*5;
+                    money = money*(5+Math.floor(upgradecost3/100));
+                    upgradecost3 = Math.floor(upgradecost3/4);
                 } else {
                     let sound3 = document.getElementById("incorrect");
                     let dupikate3 = sound3.cloneNode();
                     dupikate3.play();
                 };
-            };
+            };  
         </script> 
     </body>
 
