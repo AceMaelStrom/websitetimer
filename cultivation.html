@@ -21,6 +21,11 @@
     
         }
 
+        #stockmarket {
+            text-align: center;
+            background-color: aliceblue;
+        }
+
         .upgrades {
             background-image: linear-gradient(to left, #0000FF,#FFFFFF,#FF0000);
             border-radius: 5px;
@@ -172,6 +177,9 @@
             <button onclick="plusone()" style="display: none; height: 130px; width: 100px;" id="firstupgrade" class="upgrades"></button>
             <button onclick="plustwo()" style="height: 130px; width: 100px; display: none;" id="secondupgrade" class="upgrades"></button>
             <button onclick="plusthree()" style="height: 130px; width: 100px; display: none;" id="thirdupgrade" class="upgrades"></button>
+            <button onclick="plusfour()" style="height: 130px; width: 100px; display: none;" id="fourthupgrade" class="upgrades"></button>
+            <br>
+            <button onclick="openstockmarket()" style="height: 30px; width: 200px; display: none;" id="stockmarket">Open Market Fund</button>
             
         </div>
         <script>
@@ -179,7 +187,8 @@
             var upgradecost1 = 10;
             var upgradecost2 = 300;
             var upgradecost3 = 5;
-            var money = 0;
+            var upgradecost4 = 1500;
+            var money = 100000;
             var autoclickerpwr = 0;
             var clickpwr = 1;
             var sound = document.getElementById("jinglebells")
@@ -187,8 +196,14 @@
             var button1 = document.getElementById("firstupgrade");
             var button2 = document.getElementById("secondupgrade");
             var button3 = document.getElementById("thirdupgrade");
+            var button4 = document.getElementById("fourthupgrade");
+            //stock market button
+            var button5 = document.getElementById("stockmarket");
+
+            //money from clicks
             document.getElementById("clickIMG").addEventListener("click", () => {
             money +=clickpwr;
+            localStorage.setItem("money",money);
             document.getElementById("currency").innerText = "Baguettes: " + money;
             var dupikate = sound.cloneNode();
             dupikate.play();
@@ -204,22 +219,34 @@
                 button3.style.display = "inline-block";
                 translateupgrade();
             }
+            if (upgradecost3 >= 600) {
+                button4.style.display = "inline-block";
+                translateupgrade();
+            };
+            
 
         });
             function translateupgrade() {
                 if (languagetime === "fr") {
+                    localStorage.setItem("language", "fr");
+                    localStorage.removeItem("language", "en");
                     button1.innerText = "Mise à niveau de la baguette: +1 | Coût: " + upgradecost1 + " | Total: " + (clickpwr -1);
                     button2.innerText = "Clicker Baguette: +1 toutes les " + timer + " millisecondes | Coût: " + upgradecost2 + " | Total: " + autoclickerpwr;
                     button3.innerText = "Pariez pour le jackpot avec une chance de 5% | Coût: " + upgradecost3;
+                    button4.innerText = "Acheter une action à la bourse internationale du pain | Coût: " + upgradecost4;
                 } else if (languagetime === "en") {
+                    localStorage.setItem("language", "en");
+                    localStorage.removeItem("language", "fr");
                     button1.innerText = "Baguette Upgrade: +1 | Cost: " + upgradecost1 + " | Total: " + (clickpwr - 1);
                     button2.innerText = "Baguette Clicker: +1 every " + timer + " milliseconds | Cost: " + upgradecost2 + " | Total: " + autoclickerpwr;
                     button3.innerText = "Gamble for jackpot with a 5% chance | Cost: " + upgradecost3;
+                    button4.innerText = "Buy a stock in the international bread exchange | Cost: " + upgradecost4;
                 };
             }
             function plusone() {
                 if (money >= upgradecost1) {
                     money = money - upgradecost1;
+                    localStorage.setItem("money",money);
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     clickpwr += 1;
                     upgradecost1 = Math.round(upgradecost1 * (1.03 + Math.random() * 1.02));
@@ -232,13 +259,16 @@
                 //declare upgrade
                 if (money >= upgradecost2) {
                     money = money - upgradecost2;
+                    localStorage.setItem("money",money);
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     autoclickerpwr += 1;
                     timer = timer - (autoclickerpwr*20);
                     if (timer < 0) {
                         timer = 0;
                         button2.disabled = true;
-
+                    } else {
+                        timer = timer;
+                        button2.disabled = false;
                     };
                     autoclicker(); // STARTS AUTOCLICKING
                     upgradecost2 = Math.round(upgradecost2 * (1.09 + Math.random() * 1.06));
@@ -250,19 +280,36 @@
             function plusthree() {
                 if (money >= upgradecost3) {
                     money -= upgradecost3;
+                    localStorage.setItem("money",money);
                     document.getElementById("currency").innerText = "Baguettes: " + money;
                     upgradecost3 = Math.round(upgradecost3 * (0.8 + Math.random() * 1.1));
                     chanceclicker();
                     translateupgrade();
                 };
+            };
+            function plusfour() {
+                if ((money >= upgradecost4) && (upgradecost4>=500)) {
+                    button4.style.display = "inline-block";
+                    money -= upgradecost4;
+                    document.getElementById("currency").innerText = "Baguettes: " + money;
+                    window.open(
+                        "howto.html",
+                        "popup",
+                        "width=500, height = 700, resizable=no, scrollbars = yes"
+                    );
+                    button4.disabled = true;
+                    let opennow = document.getElementById("stockmarket");
+                    opennow.style.display = "inline-block";
+                    translateupgrade();
+                };
 
-                
             };
             //auto clicker    
             function autoclicker() {
                 if (autoclickerpwr >= 1) {
                     setInterval(() => {
                         money += 1;
+                        localStorage.setItem("money",money);
                         document.getElementById("currency").innerText = "Baguettes: " + money;
                     }, timer);
                 };
@@ -273,6 +320,7 @@
                     let dupikate2 = sound2.cloneNode();
                     dupikate2.play();
                     money = money*(5+Math.floor(upgradecost3/100));
+                    localStorage.setItem("money",money);
                     upgradecost3 = Math.floor(upgradecost3/4);
                 } else {
                     let sound3 = document.getElementById("incorrect");
@@ -280,6 +328,20 @@
                     dupikate3.play();
                 };
             };  
+            //stock market maker
+            function compgambling() {
+                localStorage.setItem("money",money);
+
+
+            };
+            //open the stock market if you closed it
+            function openstockmarket() {
+                window.open(
+                    "howto.html",
+                    "popup",
+                    "width=500, height = 700, resizable=no, scrollbars = yes"
+                );
+            };
         </script> 
     </body>
 
